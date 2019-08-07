@@ -20,6 +20,23 @@ public class Matrix4 {
 			}
 		}
 	}
+	public Matrix4(float value) {
+		matrix = new float[4][4];
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				if(i == j) 
+				{
+					matrix[i][j] = value;
+				} 
+				else 
+				{
+				matrix[i][j] = 0;
+				}
+			}
+		}
+	}
+	
+	
 
 	public static Matrix4 multiply(Matrix4 mat1, Matrix4 mat2) {
 		Matrix4 m = new Matrix4();
@@ -85,5 +102,16 @@ public class Matrix4 {
 				matrix[i][j] -= mat.matrix[i][j];
 			}
 		}
+	}
+	
+	public static Vector4 MultiplyMat4Vec4(Matrix4 mat4, Vector4 vec4)
+	{
+		Vector4 r = vec4;
+		r.x = (r.x * mat4.matrix[0][0]) + (r.y * mat4.matrix[0][1]) + (r.z * mat4.matrix[0][2]) + (r.w * mat4.matrix[0][3]);
+		r.y = (r.x * mat4.matrix[1][0]) + (r.y * mat4.matrix[1][1]) + (r.z * mat4.matrix[1][2]) + (r.w * mat4.matrix[1][3]);
+		r.z = (r.x * mat4.matrix[2][0]) + (r.y * mat4.matrix[2][1]) + (r.z * mat4.matrix[2][2]) + (r.w * mat4.matrix[2][3]);
+		r.w = (r.x * mat4.matrix[3][0]) + (r.y * mat4.matrix[3][1]) + (r.z * mat4.matrix[3][2]) + (r.w * mat4.matrix[3][3]);
+		return r;
+		
 	}
 }

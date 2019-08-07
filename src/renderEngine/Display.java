@@ -296,4 +296,45 @@ public class Display {
 		frame.pack();
 	}
 	
+	public void renderTransformedTriangle(Matrix4 mat4, Vector3 vec1, Vector3 vec2, Vector3 vec3, Vector4 color) 
+	{
+		Vector4 vec1Four = new Vector4(vec1.x,vec1.y,vec1.z,1f);
+		Vector4 vec2Four = new Vector4(vec2.x,vec2.y,vec2.z,1f);
+		Vector4 vec3Four = new Vector4(vec3.x,vec3.y,vec3.z,1f);
+		vec1Four = Matrix4.MultiplyMat4Vec4(mat4, vec1Four);
+		vec2Four = Matrix4.MultiplyMat4Vec4(mat4, vec2Four);
+		vec3Four = Matrix4.MultiplyMat4Vec4(mat4, vec3Four);
+		Vector2 vec1Con;
+		Vector2 vec2Con;
+		Vector2 vec3Con;
+		if(vec1Four.z != 0) 
+		{
+			vec1Con = new Vector2(vec1Four.x / vec1Four.z,vec1Four.y / vec1Four.z);
+		}
+		else 
+		{
+			vec1Con = new Vector2(vec1Four.x,vec1Four.y);
+		}
+		if(vec2Four.z != 0) 
+		{
+			vec2Con = new Vector2(vec2Four.x / vec2Four.z,vec2Four.y / vec2Four.z);
+		}
+		else 
+		{
+			vec2Con = new Vector2(vec2Four.x,vec2Four.y);
+		}
+		if(vec3Four.z != 0) 
+		{
+			vec3Con = new Vector2(vec3Four.x / vec3Four.z,vec3Four.y / vec3Four.z);
+		}
+		else 
+		{
+			vec3Con = new Vector2(vec3Four.x,vec3Four.y);
+		}
+		
+		
+		
+		renderTriangle(vec1Con,vec2Con,vec3Con, color);
+	}
+	
 }
