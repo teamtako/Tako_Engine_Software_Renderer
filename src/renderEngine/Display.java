@@ -38,6 +38,12 @@ public class Display {
 		frame.setResizable(false);
 	}
 	
+	public void renderVertecies(ArrayList<Vector3> arr) {
+		for(int i = 0;i<arr.size();i+=3) {
+			renderTriangle(new Vector2(arr.get(i).x,arr.get(i).y),new Vector2(arr.get(i+1).x,arr.get(i+1).y),new Vector2(arr.get(i+2).x,arr.get(i+2).y),Diffuse.calculateTraingleDiffuse(arr.get(i), arr.get(i+1), arr.get(i+2), new Light(0.5f,0.0f,1.0f), new Vector4(255f, 0, 0, 255f)));
+		}
+	}
+	
 	public void renderTriangle(Vector2 v1, Vector2 v2, Vector2 v3, Vector4 color) {
 		v1 = new Vector2((v1.x + 1f)*0.5f*display.getWidth(), (v1.y + 1f)*0.5f*display.getHeight());
 		v2 = new Vector2((v2.x + 1f)*0.5f*display.getWidth(), (v2.y + 1f)*0.5f*display.getHeight());
